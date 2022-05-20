@@ -1,0 +1,35 @@
+{
+  "name": "ml-plugin",
+  "version": "1.0.0",
+  "description": "i18n based multi-language plugin",
+  "author": "y3v4d",
+  "main": "main.js",
+  "main-menu": {
+    "Multi-language/Open": {
+      "message": "ml-plugin:open"
+    },
+    "Multi-language/Debug/Check Mounted": {
+      "message": "ml-plugin:is_mounted"
+    },
+    "Multi-language/Debug/Mount": {
+      "message": "ml-plugin:mount"
+    },
+    "Multi-language/Debug/Unmount": {
+      "message": "ml-plugin:unmount"
+    }
+  },
+  "scene-script": "utils/scene.js",
+  "panel": {
+    "main": "panel/index.js",
+    "type": "dockable",
+    "title": "Multi-language",
+    "width": 400,
+    "height": 300
+  },
+  "profiles": {
+    "project": {
+      "languages": [],
+      "current_language": ""
+    }
+  }
+}
