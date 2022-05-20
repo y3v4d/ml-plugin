@@ -1,6 +1,6 @@
 {
   "name": "ml-plugin",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "i18n based multi-language plugin",
   "author": "y3v4d",
   "main": "main.js",
@@ -16,6 +16,9 @@
     },
     "Multi-language/Debug/Unmount": {
       "message": "ml-plugin:unmount"
+    },
+    "Multi-language/Debug/Refresh resources": {
+      "message": "ml-plugin:refresh-resource"
     }
   },
   "scene-script": "utils/scene.js",

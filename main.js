@@ -3,30 +3,26 @@
 const fs = require("fire-fs");
 const path = require("path");
 
-function createDirNotExist(path, callback) {
-    if(Editor.assetdb.exists(path)) {
-        if(callback) callback(null, undefined);
+function makeResourceFolder(callback) {
+    try {
+        fs.ensureDirSync(path.join(Editor.Project.path, "./assets/resources/ml-plugin"));
 
-        return;
+        Editor.assetdb.refresh('db://assets', function (err, results) {
+            if(err) {
+                if(callback) callback(err);
+
+                return;
+            } else {
+                if(callback) callback(null, results);
+            }
+        });
+    } catch(err) {
+        callback(err);
     }
-
-    Editor.assetdb.create(path, null, function(err, results) {
-        if(err) {
-            if(callback) callback(err);
-
-            return;
-        } else callback(null, results);
-    });
 }
 
 module.exports = {
     load () {
-        try {
-            fs.ensureDirSync(path.join(Editor.Project.path, "./assets/resources/ml-plugin"));
-        } catch(err) {
-            Editor.err(`[ml-plugin load] ${err}`);
-        }
-
         try {
             Editor.assetdb.isMount("db://ml-plugin-shared-resource");
 
@@ -40,6 +36,11 @@ module.exports = {
                     if(err) Editor.error(`[ml-plugin load] ${err}`);
                     else {
                         Editor.success("[ml-plugin load] Mounted shared resources");
+
+                        makeResourceFolder(function(err, results) {
+                            if(err) Editor.error(`[ml-plugin load] ${err}`);
+                            else Editor.success(`[ml-plugin load] Refreshed resources!`);
+                        });
                     }
             });
         }
@@ -63,6 +64,12 @@ module.exports = {
     messages: {
         'open' () {
             Editor.Panel.open('ml-plugin');
+        },
+        'refresh-resource' () {
+            makeResourceFolder(function(err, results) {
+                if(err) Editor.error(`[ml-plugin refresh-resource] ${err}`);
+                else Editor.success(`[ml-plugin refresh-resource] Refreshed!`);
+            });
         },
         'test-init' () {
             Editor.assetdb.init(function (err, results) {
