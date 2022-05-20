@@ -1,6 +1,7 @@
 'use strict';
 
-const fs = require("fs");
+const fs = require("fire-fs");
+const path = require("path");
 
 function createDirNotExist(path, callback) {
     if(Editor.assetdb.exists(path)) {
@@ -21,21 +22,7 @@ function createDirNotExist(path, callback) {
 module.exports = {
     load () {
         try {
-            createDirNotExist("db://assets/resources", function(err, results) {
-                if(err) Editor.error(`[ml-plugin load] ${err}`);
-                else {
-                    if(results) Editor.success(`[ml-plugin load] Created resource folder!`);
-                    else Editor.log("[ml-plugin load] Resource folder already exists!");
-
-                    createDirNotExist("db://assets/resources/ml-plugin", function(err, results) {
-                        if(err) Editor.error(`[ml-plugin load] ${err}`);
-                        else {
-                            if(results) Editor.success(`[ml-plugin load] Created ml-plugin folder!`);
-                            else Editor.log("[ml-plugin load] ml-plugin folder already exists!");
-                        }
-                    });
-                }
-            });
+            fs.ensureDirSync(path.join(Editor.Project.path, "./assets/resources/ml-plugin"));
         } catch(err) {
             Editor.err(`[ml-plugin load] ${err}`);
         }
@@ -48,7 +35,7 @@ module.exports = {
             Editor.assetdb.mount(
                 Editor.url("packages://ml-plugin/components"), 
                 "ml-plugin-shared-resource",
-                
+                { icon: "icon-lock" },
                 function(err) {
                     if(err) Editor.error(`[ml-plugin load] ${err}`);
                     else {
