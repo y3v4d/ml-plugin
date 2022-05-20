@@ -1,6 +1,6 @@
 {
   "name": "ml-plugin",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "i18n based multi-language plugin",
   "author": "y3v4d",
   "main": "main.js",
