@@ -8,6 +8,9 @@ cc.Class({
         spriteFrameSet: {
             default: [],
             type: [SpriteFrameEntry]
+        },
+        test: {
+            default: 0
         }
     },
 
@@ -47,6 +50,8 @@ cc.Class({
         menu: "ml-plugin/SpriteLocalized",
         executeInEditMode: true,
         requireComponent: cc.Sprite,
-        disallowMultiple: true
+        disallowMultiple: true,
+
+        inspector: "packages://ml-plugin/inspector/sprite-localized.js"
     }
 });
