@@ -7,7 +7,7 @@ function makeResourceFolder(callback) {
     try {
         fs.ensureDirSync(path.join(Editor.Project.path, "./assets/resources/ml-plugin"));
 
-        Editor.assetdb.refresh('db://assets', function (err, results) {
+        Editor.assetdb.refresh('db://assets/resources/ml-plugin', function (err, results) {
             if(err) {
                 if(callback) callback(err);
 
