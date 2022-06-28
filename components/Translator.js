@@ -57,7 +57,7 @@ module.exports = {
     },
 
     getAllLanguages() {
-        console.log(Object.getOwnPropertyNames(window.ml_plugin.languages));
+        return Object.getOwnPropertyNames(window.ml_plugin.languages);
     },
 
     updateSceneRenderers() {
