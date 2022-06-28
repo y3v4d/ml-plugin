@@ -56,6 +56,10 @@ module.exports = {
         return window.ml_plugin.currentLanguage;
     },
 
+    getAllLanguages() {
+        console.log(Object.getOwnPropertyNames(window.ml_plugin.languages));
+    },
+
     updateSceneRenderers() {
         const rootNodes = cc.director.getScene().children;
 
