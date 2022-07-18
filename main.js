@@ -23,7 +23,7 @@ function makeResourceFolder(callback) {
 
 module.exports = {
     load () {
-        try {
+        /*try {
             Editor.assetdb.isMount("db://ml-plugin-shared-resource");
 
             Editor.error(`[ml-plugin load] Shared resource already mounted!`);
@@ -43,11 +43,16 @@ module.exports = {
                         });
                     }
             });
-        }
+        }*/
+
+        makeResourceFolder(function(err, results) {
+            if(err) Editor.error(`[ml-plugin load] ${err}`);
+            else Editor.success(`[ml-plugin load] Refreshed resources!`);
+        });
     },
 
     unload () {
-        try {
+        /*try {
             Editor.assetdb.isMount("db://ml-plugin-shared-resource");
             Editor.assetdb.unmount(
                 "ml-plugin-shared-resource",
@@ -57,7 +62,7 @@ module.exports = {
             });
         } catch(err) {
             Editor.log(`[ml-plugin unload] ${err}`)
-        }
+        }*/
     },
 
     // register your ipc messages here
