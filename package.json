@@ -1,24 +1,12 @@
 {
   "name": "ml-plugin",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "i18n based multi-language plugin",
   "author": "y3v4d",
   "main": "main.js",
   "main-menu": {
     "Multi-language/Open": {
       "message": "ml-plugin:open"
-    },
-    "Multi-language/Debug/Check Mounted": {
-      "message": "ml-plugin:is_mounted"
-    },
-    "Multi-language/Debug/Mount": {
-      "message": "ml-plugin:mount"
-    },
-    "Multi-language/Debug/Unmount": {
-      "message": "ml-plugin:unmount"
-    },
-    "Multi-language/Debug/Refresh resources": {
-      "message": "ml-plugin:refresh-resource"
     }
   },
   "runtime-resource": {

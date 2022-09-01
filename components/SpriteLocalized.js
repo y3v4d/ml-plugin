@@ -8,14 +8,11 @@ cc.Class({
         spriteFrameSet: {
             default: [],
             type: [SpriteFrameEntry]
-        },
-        test: {
-            default: 0
         }
     },
 
     onLoad() {
-        this.sprite = this.getComponent(cc.Sprite);
+        this._initialized = false;
 
         if(!Translator.isInitialized()) {
             Translator.init();
@@ -35,6 +32,11 @@ cc.Class({
     },
 
     updateSprite() {
+        if(!this._initialized) {
+            this.sprite = this.getComponent(cc.Sprite);
+            this._initialized = true;
+        }
+        
         const currentLanguage = Translator.getCurrentLanguage();
 
         let spriteFrame = this.getSpriteFrameByLanguage(currentLanguage);

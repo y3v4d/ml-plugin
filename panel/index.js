@@ -88,10 +88,12 @@ Editor.Panel.extend({
     },
 
     profile: null,
+    languages: [],
 
     ready () {
         // setup profile and language select
-        this.profile = this.profiles.project;
+        this.profile = Editor.Profile.load(`profile://project/ml-plugin.json`);
+        
         for(let l of this.profile.data.languages) {
             this.addSelectOption(l);
         }
@@ -130,8 +132,6 @@ Editor.Panel.extend({
                 Editor.error(`[ml-plugin changeDefaultLanguage] ${err}`);
                 return;
             }
-
-            Editor.success(`[ml-plugin changeDefaultLanguage] ${msg}`);
         });
     },
 
@@ -147,7 +147,9 @@ Editor.Panel.extend({
             this.addSelectOption(value);
             this.$input.value = "";
 
-            this.profile.data.languages.push(value);
+            const languages = this.profile.data.languages;
+            languages.push(value);
+            this.profile.data.languages = languages;
             this.profile.save();
 
             Editor.success(`[ml-plugin onAddLanguageButtonClicked] Successfully added ${value} language!`);
@@ -167,7 +169,9 @@ Editor.Panel.extend({
         }
             
         Language.removeLanguage(current).then(() => {
-            this.profile.data.languages.splice(this.profile.data.languages.findIndex(o => o === current), 1);
+            const languages = this.profile.data.languages;
+            languages.splice(languages.findIndex(o => o === current), 1);
+            this.profile.data.languages = languages;
 
             this.$current_select.removeChild(this.$current_select.querySelector(`option[value="${current}"]`));
             this.$current_select.value = this.profile.data.languages[0];

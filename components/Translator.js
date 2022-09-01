@@ -8,21 +8,16 @@ if(!window.ml_plugin) {
 }
 
 if(CC_EDITOR) {
-    Editor.Profile.load("profile://project/ml-plugin.json", (err, profile) => {
-        if(err) {
-            cc.error(err);
-            return;
-        }
+    let profile = Editor.Profile.load("profile://project/ml-plugin.json");
 
-        const current = profile.data.current_language || undefined;
-        if(current !== undefined) {
-            window.ml_plugin.currentLanguage = current;
+    const current = profile.data.current_language || undefined;
+    if(current !== undefined) {
+        window.ml_plugin.currentLanguage = current;
 
-            instance = i18n.create({
-                values: window.ml_plugin.languages[current] || {}
-            });
-        }
-    });
+        instance = i18n.create({
+            values: window.ml_plugin.languages[current] || {}
+        });
+    }
 }
 
 module.exports = {
@@ -68,8 +63,6 @@ module.exports = {
             const labels = root.getComponentsInChildren("LabelLocalized");
 
             labels.forEach(l => {
-                if(!l.node.active) return;
-
                 l.updateLabel();
             });
         }
@@ -79,9 +72,15 @@ module.exports = {
             const sprites = root.getComponentsInChildren("SpriteLocalized");
 
             sprites.forEach(s => {
-                if(!s.node.active) return;
-
                 s.updateSprite();
+            });
+        }
+
+        for(const root of rootNodes) {
+            const spines = root.getComponentsInChildren("SpineLocalized");
+
+            spines.forEach(s => {
+                s.updateSpine();
             });
         }
     }
