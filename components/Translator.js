@@ -2,7 +2,7 @@ let instance = null;
 
 if(!window.ml_plugin) {
     window.ml_plugin = {
-        languages: [],
+        languages: {},
         currentLanguage: ''
     }
 }
