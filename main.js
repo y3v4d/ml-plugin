@@ -3,34 +3,13 @@
 const fs = require("fs");
 const path = require("path");
 
-function makeResourceFolder(callback) {
-    try {
-        Editor.assetdb.refresh('db://assets/resources/ml-plugin', function (err, results) {
-            if(err) {
-                if(callback) callback(err);
-
-                return;
-            } else {
-                if(callback) callback(null, results);
-            }
-        });
-    } catch(err) {
-        callback(err);
-    }
-}
-
 module.exports = {
     load () {
         try {
             fs.mkdirSync(path.join(Editor.Project.path, "assets/resources/ml-plugin"), { recursive: true });
-            Editor.success("[ml-plugin load] Successfully loaded ml-plugin.");
         } catch(error) {
             Editor.error(`[ml-plugin load] ${error}`);
         }
-    },
-
-    unload () {
-        Editor.success("[ml-plugin] Successfully unloaded ml-plugin.");
     },
 
     // register your ipc messages here

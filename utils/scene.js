@@ -5,8 +5,6 @@ module.exports = {
         Translator.init(language);
         Translator.updateSceneRenderers();
 
-        if(!event.reply) return;
-
-        event.reply(null, "Successfully updated the scene!");
+        if(event.reply) event.reply(null);
     }
 }

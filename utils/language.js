@@ -10,7 +10,7 @@ module.exports = {
 
         return new Promise((resolve, reject) => {
             if(fs.existsSync(Editor.url(PATH))) {
-                reject(`${name} language already exists!`);
+                reject(`${name} language already exists`);
                 return;
             }
 
@@ -27,12 +27,11 @@ module.exports = {
     },
 
     removeLanguage(name) {
-        const TEMPLATE = fs.readFileSync(path.join(__dirname, './template.txt'), 'utf-8');
         const PATH = "db://assets/resources/ml-plugin";
 
         return new Promise((resolve, reject) => {
             if(!fs.existsSync(Editor.url(`${PATH}/${name}.js`))) {
-                Editor.log(`${name}.js language file doesn't exist! Removing language.`)
+                Editor.log(`[ml-plugin] ${name}.js language file doesn't exist`)
                 resolve();
 
                 return;
